@@ -49,13 +49,17 @@ app.post('/books', async (req, res) => {
         // Destructure values from the request body
         const { title, author, status, notes } = req.body;
 
+        // Ensure all fields are provided
+        if (!title || !author || !status || !notes) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
 
         // Create a new book
         const newBook = new Book({
             title,
             author,
             status,
-            notes
+            notes,
         });
 
         // Save the new book to the database
