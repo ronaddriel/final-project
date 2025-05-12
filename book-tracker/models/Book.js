@@ -5,9 +5,6 @@ const bookSchema = new mongoose.Schema({
     author: { type: String, required: true },
     status: { type: String, required: true },
     notes: { type: String, required: true },
-    dateFinished: { type: Date, default: null },
 });
 
-const Book = mongoose.model('Book', bookSchema);
-
-module.exports = Book;
+module.exports = mongoose.model('Book', bookSchema);

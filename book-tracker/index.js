@@ -1,18 +1,16 @@
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
 const Book = require('./models/Book');
 require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
 
 const app = express();
-app.use(cors());
-app.use(express.json());
 
-const corsOptions = {
-    origin: 'http://localhost:3000', // Adjust for the actual frontend URL
-    methods: ['GET', 'POST'],
-};
-app.use(cors(corsOptions));
+// Middleware
+app.use(express.json()); // Parses JSON request bodies
+app.use(cors()); // Enables CORS
+
+
 
 
 // MongoDB connection
@@ -28,7 +26,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 6000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
@@ -45,28 +43,31 @@ app.get('/books', async (req, res) => {
 
 // Add a route to add a new book
 app.post('/books', async (req, res) => {
-    console.log(req.body);  // Log the incoming request body
+    console.log('Incoming request body:', req.body);  // Log the request body to confirm it's being parsed
+
     try {
-        const { title, author, status, notes, dateFinished } = req.body;
+        // Destructure values from the request body
+        const { title, author, status, notes } = req.body;
 
-        // Validate that the fields are being received
-        if (!title || !author || !status || !notes) {
-            return res.status(400).json({ message: 'All fields are required' });
-        }
 
+        // Create a new book
         const newBook = new Book({
             title,
             author,
             status,
-            notes,
-            dateFinished: dateFinished || null,
+            notes
         });
 
-        // Save the new book
+        // Save the new book to the database
         await newBook.save();
-        res.status(201).json(newBook);
+        res.status(201).json(newBook);  // Send back the newly created book
     } catch (error) {
-        console.error('Error in POST /books:', error); // Log the error
-        res.status(500).json({ message: 'Error adding book' });
+        console.error('Error in POST /books:', error);  // Log any errors
+        res.status(500).json({ message: 'Error adding book' });  // Respond with a 500 if there's an error
     }
+});
+
+app.post('/test', (req, res) => {
+    console.log('Body received:', req.body);
+    res.json({ received: req.body });
 });
