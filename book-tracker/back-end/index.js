@@ -36,6 +36,10 @@ app.use(cors(corsOptions));
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+// Introductory route:
+app.get('/', (req, res) => {
+  res.send('Welcome to the Book Tracker API! Use /books to access the books endpoint.');
+});
 
 // Get all books:
 app.get('/books/', async (req, res) => {
