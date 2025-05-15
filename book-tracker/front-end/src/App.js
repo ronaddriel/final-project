@@ -15,7 +15,7 @@ const App = () => {
 
   const fetchBooks = () => {
     axios
-    .get(`${process.env.REACT_APP_API_URL}/books`)
+    .get(`${process.env.REACT_APP_API_URL}/books`,  { withCredentials: true })
       .then((res) => setBooks(res.data))
       .catch((err) => console.error(err));
   };

@@ -6,13 +6,13 @@ const BookList = ({ books, fetchBooks }) => {
   const navigate = useNavigate();
 
   const handleEdit = (id) => {
-    navigate(`/edit/${id}`); // Navigate to the edit page with the book ID
+    navigate(`/edit/${id}`); 
   };
 
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this book?')) {
       axios
-        .delete(`http://localhost:3000/books/${id}`) // Send DELETE request to backend
+        .delete(`${process.env.REACT_APP_API_URL}/books/${id}`,  { withCredentials: true })
         .then(() => {
           fetchBooks(); // Refresh the book list after deletion
         })

@@ -17,7 +17,7 @@ function BookEdit() {
   // Fetch the book data to edit
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/books/${id}`) // Use environment variable
+      .get(`${process.env.REACT_APP_API_URL}/books/${id}`,  { withCredentials: true }) // Use environment variable
       .then((res) => {
         setFormData(res.data); // Populate the form with the book data
       })
@@ -37,7 +37,7 @@ function BookEdit() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`${process.env.REACT_APP_API_URL}/books/${id}`, formData) // Use environment variable
+      .put(`${process.env.REACT_APP_API_URL}/books/${id}`, formData,  { withCredentials: true }) // Use environment variable
       .then(() => navigate('/')) // Redirect after successful update
       .catch((err) => {
         console.error('Update error:', err);
