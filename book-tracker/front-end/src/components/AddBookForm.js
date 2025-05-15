@@ -18,19 +18,19 @@ const AddBookForm = ({ onAddBook }) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/books`, { withCredentials: true }, formData) // Use environment variable
-      .then((res) => {
-        setMessage('Book added successfully!');
-        onAddBook(res.data); // Notify parent about the new book
-        setFormData({ title: '', author: '', status: '', notes: '' }); // Reset form
-      })
-      .catch((err) => {
-        console.error('Error adding book:', err.response || err.message); 
-        setMessage('Error adding book');
-      });
-  };
+  e.preventDefault();
+  axios
+    .post(`${process.env.REACT_APP_API_URL}/books`, formData, { withCredentials: true }) // Correct placement of formData and withCredentials
+    .then((res) => {
+      setMessage('Book added successfully!');
+      onAddBook(res.data); // Notify parent about the new book
+      setFormData({ title: '', author: '', status: '', notes: '' }); // Reset form
+    })
+    .catch((err) => {
+      console.error('Error adding book:', err.response?.data || err.message); 
+      setMessage(err.response?.data?.message || 'Error adding book');
+    });
+};
 
   return (
     <form onSubmit={handleSubmit}>

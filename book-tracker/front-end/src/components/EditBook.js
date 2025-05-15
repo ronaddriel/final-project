@@ -17,12 +17,12 @@ function BookEdit() {
   // Fetch the book data to edit
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/books/${id}`,  { withCredentials: true }) // Use environment variable
+      .get(`${process.env.REACT_APP_API_URL}/books/${id}`, { withCredentials: true }) // Correct placement of withCredentials
       .then((res) => {
         setFormData(res.data); // Populate the form with the book data
       })
       .catch((err) => {
-        console.error('Error fetching book:', err);
+        console.error('Error fetching book:', err.response?.data || err.message);
         setError('Book not found');
       });
   }, [id]);
@@ -37,15 +37,15 @@ function BookEdit() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`${process.env.REACT_APP_API_URL}/books/${id}`, formData,  { withCredentials: true }) // Use environment variable
+      .put(`${process.env.REACT_APP_API_URL}/books/${id}`, formData, { withCredentials: true }) // Correct placement of withCredentials
       .then(() => navigate('/')) // Redirect after successful update
       .catch((err) => {
-        console.error('Update error:', err);
+        console.error('Update error:', err.response?.data || err.message);
         setError('Error updating book');
       });
   };
 
-  if (error) return <p>{error}</p>;
+  if (error) return <p className="text-red-500">{error}</p>;
 
   return (
     <div className="p-4 max-w-md mx-auto">
@@ -72,7 +72,11 @@ function BookEdit() {
           value={formData.status}
           onChange={handleChange}
           className="w-full border p-2 rounded"
+          required
         >
+          <option value="" disabled>
+            Select Status
+          </option>
           <option value="To Read">To Read</option>
           <option value="Reading">Reading</option>
           <option value="Finished">Finished</option>

@@ -12,11 +12,14 @@ const BookList = ({ books, fetchBooks }) => {
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this book?')) {
       axios
-        .delete(`${process.env.REACT_APP_API_URL}/books/${id}`,  { withCredentials: true })
+        .delete(`${process.env.REACT_APP_API_URL}/books/${id}`, { withCredentials: true })
         .then(() => {
           fetchBooks(); // Refresh the book list after deletion
         })
-        .catch((err) => console.error('Error deleting book:', err));
+        .catch((err) => {
+          console.error('Error deleting book:', err.response?.data || err.message);
+          alert(err.response?.data?.message || 'Failed to delete the book. Please try again.');
+        });
     }
   };
 
