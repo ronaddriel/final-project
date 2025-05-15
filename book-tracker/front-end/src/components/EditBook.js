@@ -16,18 +16,17 @@ function BookEdit(){
 const [error, setError] = useState('');
 
   // Get the book data to edit
-  useEffect(() => {
+   // Fetch the book data to edit
+   useEffect(() => {
     axios
-      .get(`http://localhost:3000/books`)
+      .get(`http://localhost:3000/books/${id}`) // Fetch the book by ID
       .then((res) => {
-        const bookToEdit = res.data.find((book) => book._id === id);
-        if (bookToEdit) {
-          setFormData(bookToEdit);
-        } else {
-          setError('Book not found');
-        }
+        setFormData(res.data); // Populate the form with the book data
       })
-      .catch((err) => setError('Error loading book'));
+      .catch((err) => {
+        console.error('Error fetching book:', err);
+        setError('Book not found');
+      });
   }, [id]);
 
   const handleChange = (e) => {
