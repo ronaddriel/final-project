@@ -1,25 +1,23 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function BookEdit(){
-    const { id } = useParams();
-    const navigate = useNavigate();
-    const [formData, setFormData] = useState({
-        title: '',
-        author: '',
-        status: '',
-        notes: ''
-    });
+function BookEdit() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    title: '',
+    author: '',
+    status: '',
+    notes: ''
+  });
 
-const [error, setError] = useState('');
+  const [error, setError] = useState('');
 
-  // Get the book data to edit
-   // Fetch the book data to edit
-   useEffect(() => {
+  // Fetch the book data to edit
+  useEffect(() => {
     axios
-      .get(`http://localhost:3000/books/${id}`) // Fetch the book by ID
+      .get(`${process.env.REACT_APP_API_URL}/books/${id}`) // Use environment variable
       .then((res) => {
         setFormData(res.data); // Populate the form with the book data
       })
@@ -39,7 +37,7 @@ const [error, setError] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:3000/books/${id}`, formData)
+      .put(`${process.env.REACT_APP_API_URL}/books/${id}`, formData) // Use environment variable
       .then(() => navigate('/')) // Redirect after successful update
       .catch((err) => {
         console.error('Update error:', err);
@@ -47,7 +45,7 @@ const [error, setError] = useState('');
       });
   };
 
-if (error) return <p>{error}</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="p-4 max-w-md mx-auto">
@@ -96,6 +94,5 @@ if (error) return <p>{error}</p>;
     </div>
   );
 }
-
 
 export default BookEdit;

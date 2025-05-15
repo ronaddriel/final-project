@@ -15,7 +15,7 @@ const App = () => {
 
   const fetchBooks = () => {
     axios
-      .get('http://localhost:3000/books')
+    .get(`${process.env.REACT_APP_API_URL}/books`)
       .then((res) => setBooks(res.data))
       .catch((err) => console.error(err));
   };

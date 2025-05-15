@@ -20,7 +20,7 @@ const AddBookForm = ({ onAddBook }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:3000/books', formData)
+      .post(`${process.env.REACT_APP_API_URL}/books`, formData) // Use environment variable
       .then((res) => {
         setMessage('Book added successfully!');
         onAddBook(res.data); // Notify parent about the new book
