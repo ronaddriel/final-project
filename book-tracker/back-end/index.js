@@ -25,7 +25,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 const PORT = process.env.PORT || 3000;
 const corsOptions = {
   origin: [
-    'https://final-project-frontend-46vhwfy5t-ron-manoscas-projects.vercel.app', // Your front-end deployment URL
+    'final-project-frontend-1lqycpz2w-ron-manoscas-projects.vercel.app', // Your front-end deployment URL
     'http://localhost:3000', // Allow local development
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
