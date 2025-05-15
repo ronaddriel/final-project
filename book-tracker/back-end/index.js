@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const Book = require('../models/Book');
+const Book = require('./models/Book');
 require('dotenv').config();
 
 const app = express();
@@ -25,14 +25,13 @@ mongoose.connect(process.env.MONGODB_URI, {
 const PORT = process.env.PORT || 3000;
 const corsOptions = {
   origin: [
-    'https://final-project-frontend-beta-three.vercel.app/', // Add your front-end URL
+    'final-project-frontend-46vhwfy5t-ron-manoscas-projects.vercel.app', // Your front-end URL
     'http://localhost:3000', // Allow local development
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
   credentials: true, // Allow cookies if needed
 };
-
-app.use(cors(corsOptions)); 
+app.use(cors(corsOptions));
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
