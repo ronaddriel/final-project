@@ -23,7 +23,12 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 // Start the server:
 const PORT = process.env.PORT || 3000;
-app.use(cors());
+const corsOptions = {
+  origin: 'https://final-project-b7tx-8c6loqbsb-ron-manoscas-projects.vercel.app', // Replace with your front-end URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+  credentials: true, // Allow cookies if needed
+};
+app.use(cors(corsOptions)); // Use the defined CORS options
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
