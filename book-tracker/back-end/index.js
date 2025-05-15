@@ -25,12 +25,13 @@ mongoose.connect(process.env.MONGODB_URI, {
 const PORT = process.env.PORT || 3000;
 const corsOptions = {
   origin: [
-    'final-project-frontend-46vhwfy5t-ron-manoscas-projects.vercel.app', // Your front-end URL
+    'https://final-project-frontend-46vhwfy5t-ron-manoscas-projects.vercel.app', // Your front-end deployment URL
     'http://localhost:3000', // Allow local development
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
   credentials: true, // Allow cookies if needed
 };
+
 app.use(cors(corsOptions));
 
 app.listen(PORT, () => {
