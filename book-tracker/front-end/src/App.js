@@ -28,8 +28,12 @@ const App = () => {
   const location = useLocation(); // Get the current route
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>Book Tracker App:</h1>
+    
+    <div className="min-h-screen bg-[#fefce8] p-8">
+  <div className="max-w-3xl mx-auto">
+    <h1 className="text-4xl font-bold text-[#5b3e3e] mb-6 text-center">
+      📚 Welcome to the Book Tracker App! 
+    </h1>
       {/* Render AddBookForm only on the main page */}
       {location.pathname === '/' && <AddBookForm onAddBook={handleAddBook} />}
       <hr />
@@ -43,6 +47,8 @@ const App = () => {
         <Route path="/edit/:id" element={<EditBook />} />
       </Routes>
     </div>
+    </div>
+    
   );
 };
 
