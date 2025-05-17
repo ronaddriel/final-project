@@ -24,32 +24,40 @@ const BookList = ({ books, fetchBooks }) => {
   };
 
   return (
-    <div>
-      <h2>Book List</h2>
-      <ul>
+       <div>
+      <h2 className="text-2xl font-semibold text-[#5b3e3e] mb-6 text-center">📖 Your Books</h2>
+      <div className="space-y-6">
         {books.map((book) => (
-          <li key={book._id} className="border p-4 mb-4 rounded">
-            <h3 className="font-bold text-lg">{book.title}</h3>
-            <p><strong>Author:</strong> {book.author}</p>
-            <p><strong>Status:</strong> {book.status}</p>
-            <p><strong>Notes:</strong> {book.notes}</p>
-            <div className="flex gap-2">
+          <div
+            key={book._id}
+            className="bg-[#faf9e6] rounded-2xl shadow-xl p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+          >
+            {/* Book details */}
+            <div className="flex-1">
+              <h3 className="text-xl font-bold text-[#806859]">{book.title}</h3>
+              <p className="text-[#5b3e3e]"><strong>Author:</strong> {book.author}</p>
+              <p className="text-[#5b3e3e]"><strong>Status:</strong> {book.status}</p>
+              <p className="text-[#5b3e3e]"><strong>Notes:</strong> {book.notes}</p>
+            </div>
+
+            {/* Action buttons */}
+            <div className="flex gap-3 md:flex-col md:items-end">
               <button
-                onClick={() => handleEdit(book._id)} // Call handleEdit with the book ID
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                onClick={() => handleEdit(book._id)}
+                className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition"
               >
                 Edit
               </button>
               <button
-                onClick={() => handleDelete(book._id)} // Call handleDelete with the book ID
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 ml-2"
+                onClick={() => handleDelete(book._id)}
+                className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition"
               >
                 Delete
               </button>
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
