@@ -31,7 +31,7 @@ const BookList = ({ books, fetchBooks }) => {
         {books.map((book) => (
           <div
             key={book._id}
-            className="bg-[#f5e2d7] rounded-2xl shadow-xl p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+            className="bg-[#e2f0d8] rounded-2xl shadow-xl p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
           >
             {/* Book details */}
             <div className="flex-1">
