@@ -25,12 +25,13 @@ const BookList = ({ books, fetchBooks }) => {
 
   return (
        <div>
+        
       <h2 className="text-2xl font-semibold text-[#5b3e3e] mb-6 text-center">📖 Your Books</h2>
       <div className="space-y-6">
         {books.map((book) => (
           <div
             key={book._id}
-            className="bg-[#faf9e6] rounded-2xl shadow-xl p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+            className="bg-[#f5e2d7] rounded-2xl shadow-xl p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
           >
             {/* Book details */}
             <div className="flex-1">
