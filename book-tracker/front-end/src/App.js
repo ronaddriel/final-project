@@ -35,7 +35,11 @@ const App = () => {
       📚 Welcome to the Book Tracker App! 
     </h1>
       {/* Render AddBookForm only on the main page */}
-      {location.pathname === '/' && <AddBookForm onAddBook={handleAddBook} />}
+      {location.pathname === '/' && (
+  <div className="mb-10">
+    <AddBookForm onAddBook={handleAddBook} />
+  </div>
+)}
       <hr />
       <Routes>
         {/* Main page with the book list */}
